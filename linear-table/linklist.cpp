@@ -7,7 +7,7 @@ typedef struct LNode {
 	struct LNode* next;
 }LNode;
 
-//β�巨  tail interplotation 
+//tail interplotation 
 void createLinkListR(LNode*& head) {
 	head = (LNode*)malloc(sizeof(LNode));
 	head->next = NULL;
@@ -23,7 +23,7 @@ void createLinkListR(LNode*& head) {
 	}
 }
 
-//ͷ�巨 first interplotation
+//first interplotation
 void createLinkListH(LNode*& head) {
 	head = (LNode*)malloc(sizeof(LNode));
 	head->next = NULL;
@@ -37,6 +37,11 @@ void createLinkListH(LNode*& head) {
 		p->next = head->next;
 		head->next = p;
 	}
+}
+
+//find and delete target node
+int findDelete(LNode *head, int target) {
+	
 }
 
 //merge two nodelist
