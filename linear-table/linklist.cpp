@@ -40,8 +40,12 @@ void createLinkListH(LNode*& head) {
 }
 
 //find and delete target node
-int findDelete(LNode *head, int target) {
-	
+void findDelete(LNode *head, int target) {
+	LNode *r = head;
+	while (r->next->data != target) {
+		r = r->next;
+	}
+	r->next = r->next->next;
 }
 
 //merge two nodelist
@@ -111,15 +115,15 @@ void print2(int arr[], int n) {
 } 
 
 int main() {
-//	LNode *a, *b, *c;
-//	createLinkListR(a);
-//	createLinkListR(b);
-//	merge(a, b, c);
-//	print(c);
-//	return 0;
-	int arr[] = {2, 1, -7, -3, 5, 6, -1};
-	partition(arr, 7, 1);
-	print2(arr, 7);
+	LNode *a;
+	createLinkListR(a);
+	print(a);
+	findDelete(a, 2);
+	print(a);
 	return 0;
+//	int arr[] = {2, 1, -7, -3, 5, 6, -1};
+//	partition(arr, 7, 1);
+//	print2(arr, 7);
+//	return 0;
 	
 }
