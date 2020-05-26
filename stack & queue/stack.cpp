@@ -82,3 +82,17 @@ void infixToPreFix(char infix[], int len, char s2[], int &top2) {
 		s2[++top2] = s1[top--]; // transfor left character from s1 to s2
 	}
 }
+
+
+//get priority of symbol; only + - / *
+int getPriority(char op) {
+	if (op == '+' || op == '-') {
+		return 0;
+	}
+	else {
+		return 1;
+	}
+}
+
+
+//calculate the result of infix expression
