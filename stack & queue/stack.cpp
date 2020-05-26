@@ -96,3 +96,71 @@ int getPriority(char op) {
 
 
 //calculate the result of infix expression
+int calSub(float opand1, char op, float opand2, float &result) {
+	if (op == '+') result = opand1 + opand2;
+	if (op == '-') result = opand1 - opand2;
+	if (op == '*') result = opand1 * opand2;
+	if (op == '/') {
+		if (fabs(opand2) < MIN) {
+			return 0;
+		}
+		else {
+			result = opand1 / opand2;
+		}
+	}
+	return 1;
+}
+
+int calStackTopTwo(float s1[], int &top1, char s2[], int &top2) {
+	float opand1, opand2, result;
+	char op;
+	int flag;
+	opand2 = s1[top--];
+	opand1 = s1[top--];
+	op = s2[top2--];
+	flag = calSub(opand1, op, opand2, result);
+	if (flag == 0) {
+		std::cout << "ERROR" <<endl;
+	}
+	s1[++top1] = result;
+	return flag;
+}
+
+float calInfix(char exp[]) {
+	float s1[maxSize];
+	char s2[maxSize];
+	int top1 = -1, top = -1;
+	while (exp[i] != '\0') {
+		if ('0' <= exp[i] && exp[i] <= 9) {
+			s1[++top1] = exp[i] - '0';
+			i++;
+		}
+		else if (exp[i] == '(') {
+			s2[++top2] = '(';
+			++i;
+		}
+		else if (exp[i] == '+' || exp[i] == '-' || exp[i] == '*' || exp[i] == '/') {
+			if (top2 == -1 || s2[top2] == '(' || getPriority(exp[i]) > getPriority(s2[top2])) {
+				s2[++top2] = exp[i];
+				i++;
+			}
+			else {
+				int flag = calStackTopTwo(s1, top1, s2, top2);
+				if (flag == 0) return 0;
+			} 
+		}
+		else if (exp[i] == ')') {
+			while (s2[top2] != '(') {
+				int flag = calStackTopTwo(s1, top1, s2, top2);
+				if (flag == 0) return 0;
+			}
+			top2--;
+			i++;
+		}
+	}
+	while (top2 != -1) {
+		int flag = calStackTopTwo(s1, top1, s2, top2);
+		if (flag == 0) return 0;
+	}
+	return s1[top1];
+}
