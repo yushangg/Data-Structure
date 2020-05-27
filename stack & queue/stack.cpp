@@ -164,3 +164,36 @@ float calInfix(char exp[]) {
 	}
 	return s1[top1];
 }
+
+
+//calculate the result of postfix  (only number and + - * /)
+float claPostFix(char exp[]) {
+	float s[maxSize];
+	int top = -1;
+	int i = 0;
+	for (int i = 0; exp[i] != '\0'; i++) {
+		if ('0' <= exp[i] && exp[i] <= '9') {
+			s[++top] = exp[i] - '0';
+		}
+		else {
+			float opand1, opand2, result;
+			char op;
+			int flag;
+			opand2 = s[top--];
+			opand1 = s[top--];
+			op = exp[i];
+			flag = calSub(opand1, op, opand2, result);
+			if (flag == 0) {
+				std::cout << "error" << std::endl;
+				break;
+			}
+			s[++top] = result;
+		}
+	}
+	return s[top];
+}
+
+
+//calculate the result of prefix (from right to  left)
+
+
