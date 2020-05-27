@@ -185,7 +185,7 @@ float claPostFix(char exp[]) {
 			flag = calSub(opand1, op, opand2, result);
 			if (flag == 0) {
 				std::cout << "error" << std::endl;
-				break;
+				return 0;
 			}
 			s[++top] = result;
 		}
@@ -195,5 +195,28 @@ float claPostFix(char exp[]) {
 
 
 //calculate the result of prefix (from right to  left)
-
+float calPreFix(char exp[], int len) {
+	float s[maxSize];
+	int top = -1;
+	for (int i = len - 1; i >= 0; i--) {
+		if ('0' <= exp[i] && exp[i] >= '9') {
+			s[++top] = exp[i] - '0';
+		}
+		else {
+			float opand1, opand2, result;
+			char op;
+			int flag;
+			opand1 = s[top--];
+			opand2 = s[top--];
+			op = exp[i];
+			flag = calSub(opand1, op, opand2, result);
+			if (flag == 0) {
+				std::cout << "error" << std::endl;
+				return 0;
+			}
+			s[++top] = result;
+		}
+	}
+	return s[top];
+}
 
