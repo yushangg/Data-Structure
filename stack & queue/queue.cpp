@@ -14,3 +14,6 @@ queue[rear] = x;
 //out
 front = (front +  1) % maxSize;
 x = queue[front];
+
+
+//deque 

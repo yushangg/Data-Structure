@@ -220,3 +220,64 @@ float calPreFix(char exp[], int len) {
 	return s[top];
 }
 
+
+//parentheses matching
+int isMatched(char left, char right) {
+	if (left == '(' && right == ')') {
+		return 1;
+	}
+	else if (left == '[' && right == ']') {
+		return 1;
+	}
+	else if (left == '{' && right == '}') {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+int isParenthesesBalanced(char exp[]) {
+	char s[maxSize];
+	int top = -1;
+	for (int  = 0; exp[i] != '\0'; i++) {
+		if (exp[i] == '(' || exp[i] == '[' || exp[i] == '{') {
+			s[++top] = exp[i];
+		}
+		else if (exp[i] == ')' || exp[i] == ']' || exp[i] == '}'){
+			if (top == -1) {
+				return 0;
+			}
+			char left = s[top--];
+			if (isMatched(left, exp[i]) == 0) {
+				return 0;
+			}
+		}
+	}
+	//stack is not null, match failed
+	if (top > -1) {
+		return 0;
+	}
+	return 1;
+}
+
+
+/*calculate some questions
+           | 1, m = 1;
+ex. F(m) = |
+		   | m * F(m / 3), m > 1
+
+*/
+
+int calF(int m) {
+	int res = 1;
+	int s[maxSize], top = -1;
+	while (m != 0) {
+		s[++top] = m;
+		m /= 3;
+	}
+	while (top != -1) {
+		res = *= s[top--];
+	}
+	return res;
+}
