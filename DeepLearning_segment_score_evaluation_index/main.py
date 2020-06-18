@@ -20,9 +20,15 @@ def cal(binary_GT,binary_R):
     # print(TP,FN,FP,TN)
     print('PA Acc计算结果，      Acc       = {0:.4}'.format((TP+TN)/(TP+TN+FP+FN)))
     print('Precision计算结果，      Precision       = {0:.4}'.format(TP/ (TP + FP)))
+    print('斑块IoU计算结果，= {0:.4}'.format(TP / (TP + FP + FN)))
     print('MIoU计算结果，= {0:.4}'.format(TP/(TP + FP + FN) + TN/(TN + FN + FP)/2))
     print('Recall计算结果，= {0:.4}'.format(TP/(TP + FN)))
     print('acc 斑块类计算结果，      Acc       = {0:.4}'.format(TP / (TP + FN)))
+
+    P = TP/ (TP + FP)
+    R = TP/(TP + FN)
+    F1 = 2*P*R/(P+R)
+    print('F1，          = {0:.4}'.format(F1))
 
 if __name__ == '__main__':
     # step 1：读入图像，并灰度化
