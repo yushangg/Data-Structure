@@ -198,3 +198,15 @@ public class student        //定义类
    }
 }
 ```
+### 类的访问权限
+```c++
+private: 私有 -- 例如你的卧室，只有你能用
+protected: 保护  --例如你家的厨房，你可以用，你家人（派生类）也可以用
+public: 公有  --例如你家的客厅，所有人都可以用
+
+```
+### 继承与派生
+```c++
+class underg_student: public student   // 前面的子类由后面的派生类继承而来
+
+```
