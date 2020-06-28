@@ -171,3 +171,30 @@ void main( )
     cout<<"max(2.3,5.6,3.1)="<<max(2.3,5.6,3.1)<<endl;
 }
 ```
+### 类
+```c++
+#include<stdio.h>
+public class student        //定义类
+{
+   private:      //表示以下为私有成员
+   int num;
+   char name[10];
+   char sex;
+   public:       //表示以下为公有成员
+   student() //构造函数
+   {
+       num =10010;
+       strcyp(name,"wanglin");
+       sex = 'F';
+   }
+   ~student()//析构函数
+   {}
+
+   void display()       //定义函数
+   {
+      cout<<"num:"<<num<<endl;
+      cout<<"name:"<<name<<endl;
+      cout<<"sex:"<<sex<<endl;
+   }
+}
+```
