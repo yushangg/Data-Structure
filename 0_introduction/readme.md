@@ -117,13 +117,13 @@ ADT List
 - 源文件.cpp 中，通常包含对具体数据结构的使用操作
 
 
-## # include "stdio.h"
+## #include "stdio.h"
 - c语言标准输入输出流。该文件包含printf()等函数
 
-## # include "stdlib.h"   
+## #include "stdlib.h"   
 - c语言标准库。该文件包含malloc()、realloc()和free()等函数.malloc()分配内存、realloc()动态内存调整、free()释放内存
 
-## # include "iostream.h"
+## #include<iostream>
 - c++标准输入输出流，用了这个，就可以用cout和cin了
 ```c++
 int a;
@@ -132,7 +132,7 @@ cout<<"a = "<<a<<endl;
 cout<<hello world<<endl;
 ```
 
-## # include<iomanip>
+## #include<iomanip>
 - c++输入输出流控制文件，该文件包含cout,cin及setw()等函数，用了这个就不用iostream。setw()用来控制输出的间隔，在输出的时候分配了n个字符的输出宽度，默认 n个字符宽度中右对齐输出
 
 ### include "SqList.h"     
@@ -148,5 +148,26 @@ int add (int x, const int y, const int &z)    //值参数，常值参数，常�
 void main  //返回值为空
 {  int t=6;
    add(4,5,t);
+}
+```
+### 重载
+```c++
+#include<iostream>                 // 该文件包含标准输入输出流cout和cin
+int max(int a,int b)                    // 函数1
+{
+    return(a>b?a:b);
+}
+float max(float a,float b,float c)       // 函数2
+{
+    float t=a;
+    if(t<b) t=b;
+    if(t<c) t=c;
+    return t;
+}
+
+void main( )
+{
+    cout<<"max(2,3)="<<max(2,3)<<endl;
+    cout<<"max(2.3,5.6,3.1)="<<max(2.3,5.6,3.1)<<endl;
 }
 ```
