@@ -210,3 +210,21 @@ public: 公有  --例如你家的客厅，所有人都可以用
 class underg_student: public student   // 前面的子类由后面的派生类继承而来
 
 ```
+
+### 变量的引用类型
+```c++
+#include<stdio.h>
+void swap(int &p1,int &p2)  
+{  
+    int temp;
+    temp=p1;
+    p1=p2;
+    p2=temp;}
+
+void main( )
+{
+    int a=5,b=9;
+    if(a<b) swap(a,b);
+    printf("\na=%d,b=%d\n",a,b);
+}
+`````````
