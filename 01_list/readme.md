@@ -50,3 +50,13 @@ ADT List
 
 #### 注意事项
 - 访问顺序表中任意元素的时间都相等，具有这一特点的存储结构称为**随机存取结构**。
+
+#### 顺序表静态存储数据结构
+```C
+[in SqList.h]
+# define LIST_INIT_SIZE 100    //(默认)最大存储容量
+typedef struct {
+    ElemType  elem [LIST_INIT_SIZE];   //存储数据元素的一维数组
+    int length;                        //线性表的当前长度
+} SqList;
+```
