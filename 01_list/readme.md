@@ -139,3 +139,27 @@ bool ListInsert_Sq(SqList &L, int i, ElemType e)
     return true;   
 }// ListInsert_Sq
 ```
+-----------------------------
+#### 顺序表后插
+在顺序表L的第i个元素之**后**插入新的元素e，若表中当前容量不足，则按预定义的增量扩容
+```C
+[in SqList.h]
+bool ListInsert_Sq(SqList &L, int i, ElemType e)
+{   
+    int j;
+        if(i<0||i>L.length)  return false;  // i值不合法
+        if(L.length>=L.listsize)           // 当前存储空间已满，增补空间
+        {                   
+            L.elem=(ElemType *)realloc(L.elem,(L.listsize+L.incrementsize)*sizeof(ElemType));
+            if(!L.elem) exit(1);                   // 存储分配失败
+            L.listsize+=L.incrementsize;           // 当前存储容量增加
+        }
+    int target=i+1;
+    for(j=L.length;j>target;j--)                // 被插入元素之后的元素左移
+        L.elem[j]=L.elem[j-1];             
+        
+    L.elem[target]=e;                           // 插入元素e
+    L.length++;                            // 表长增1
+    return true;   
+}// ListInsert_Sq
+```
