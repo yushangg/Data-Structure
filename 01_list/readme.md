@@ -163,3 +163,48 @@ bool ListInsert_Sq(SqList &L, int i, ElemType e)
     return true;   
 }// ListInsert_Sq
 ```
+-----------------------------
+
+#### 顺序表尾插
+在顺序表L的最后一个元素之**后**插入新的元素e，若表中当前容量不足，则按预定义的增量扩容
+```C
+[in SqList.h]
+bool ListInsert_Sq(SqList &L, int i, ElemType e)
+{   
+    int j;
+        if(i<0||i>L.length)  return false;  // i值不合法
+        if(L.length>=L.listsize)           // 当前存储空间已满，增补空间
+        {                   
+            L.elem=(ElemType *)realloc(L.elem,(L.listsize+L.incrementsize)*sizeof(ElemType));
+            if(!L.elem) exit(1);                   // 存储分配失败
+            L.listsize+=L.incrementsize;           // 当前存储容量增加
+        }           
+    L.elem[L.length]=e;                           // 插入元素e
+    L.length++;                            // 表长增1
+    return true;   
+}// ListInsert_Sq
+```
+
+-----------------------------
+
+#### 顺序表查插
+在递增有序顺序表L中查找插入新的元素e，首先需要找到在哪插
+```C
+[in SqList.h]
+bool ListInsert_Sq_1(SqList &L, ElemType e)
+{   
+// 若表中当前容量不足，则按预定义的增量扩容
+      int i,j;
+      if(L.length>=L.listsize)  {          // 当前存储空间已满，增补空间
+          L.elem=(ElemType *)realloc(L.elem,(L.listsize+L.incrementsize)*sizeof(ElemType));
+          if(!L.elem) exit(1);                   // 存储分配失败
+          L.listsize+=L.incrementsize;           // 当前存储容量增加
+        }
+      for(i=0;i<L.length&&e>L.elem[i];i++); //让下标移动到应该插入的位置之前
+	  for(j=L.length;j>i;j--)                // 被插入元素之后的元素左移
+        L.elem[j]=L.elem[j-1];
+      L.elem[i]=e;                           // 插入元素e
+      L.length++;                            // 表长增1
+      return true;   
+}// ListInsert_Sq
+```
