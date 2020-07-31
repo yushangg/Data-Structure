@@ -93,3 +93,52 @@ bool listDeleteBetween(SqList& L, int s, int t) {
 	return true;
 }
 
+//Q6
+//delete ith element from list, don not consider about error , delete repeating n elements from ith to  i + n th
+void deleteList(SqList& L, int i, int n) {
+	for (int j = 0; j < n; j++) {
+		L.data[i - 1 + j] = L.data[i + j];
+	}
+	L.length -= n;
+}
+
+//consider moving n elements in one operation failed
+void deleteRepeated(SqList& L) {
+	int count = 0;
+	for (int i = 0; i < L.length - 1; i++) {
+		if (L.data[i] == L.data[i + 1]) {
+			count++;
+		}
+		else {
+			deleteList(L, i - count + 1, count);
+			L.length = -count;
+			count = 0;
+		}
+	}
+}
+
+//Q7
+bool merge(SqList& L1, SqList& L2, SqList &L) {
+	if (L1.length + L2.length > L.maxSize) {
+		return false;
+	}
+	int i = 0, j = 0, k = 0;
+	while (i < L1.length && j < L2.length) {
+		if (L1.data[i] <= L2.data[j]) {
+			L.data[k] = L1.data[i];
+			k++;
+			i++;
+		}
+		else {
+			L.data[k++] = L2.data[j++];
+		}
+	}
+	while (i < L1.length) {
+		L.data[k++] = L1.data[i++];
+	}
+	while (j < L2.length) {
+		L.data[k++] = L2.data[j++];
+	}
+	L.length = k;
+	return true;
+}
