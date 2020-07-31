@@ -6,7 +6,7 @@ typedef struct{
 }SqList;
 
 //Q1
-int Delete(SqList& L) {
+int deleteMin(SqList& L) {
 	//the Sqlist is empty or only has one elements
 	if (L.lenght == 0 || L.length == 1) {
 		return 0;
@@ -24,6 +24,7 @@ int Delete(SqList& L) {
 	return target;
 }
 
+
 //Q2
 void exchange(SqList& L) {
 	int i = 0, j = L.length - 1, temp;
@@ -33,6 +34,15 @@ void exchange(SqList& L) {
 		L.data[j] = temp;
 		i++;
 		j--;
+	}
+}
+
+void reverse(SqList& L) {
+	for (int i = 0; i < L.length / 2; i++) {
+		Elemtype temp;
+		temp = L.data[i];
+		L.data[i] = L.data[L.length - 1 - i];
+		L.data[L.length - 1 - i] = temp;
 	}
 }
 
