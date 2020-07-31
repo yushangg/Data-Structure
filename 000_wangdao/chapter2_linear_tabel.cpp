@@ -37,6 +37,7 @@ void exchange(SqList& L) {
 	}
 }
 
+	//answer
 void reverse(SqList& L) {
 	for (int i = 0; i < L.length / 2; i++) {
 		Elemtype temp;
@@ -47,15 +48,54 @@ void reverse(SqList& L) {
 }
 
 //Q3
+//a bit tedious
 void Delete(SqList &L, int x){
 	int i = 0, j = L.length - 1;
 	while (i <= j) {
 		if (L.data[i] == x && L.data[j] != x) {
 			L.data[i] = L.data[j];
+			i++;
 			j--;
 			L.length -= 1;
 		}
+		else if (L.data[i] == x && L.data[j] == x) {
+			j--;
+			L.length--;
+		}
+		else if (L.data[i] != x && L.data[j] == x) {
+			i++;
+			j--;
+			L.length--;
+		}
+		else {
+			i++;
+		}
 	}
+}
+
+	//answer 3:
+void delX(SqList& L, Elemtype x) {
+	int k = 0;		//number != x
+	for (int i = 0; i < L.length; i++) {
+		if (L.data[i] != x) {
+			L.data[k] = L.data[i];
+			k++;
+		}
+	}
+	L.length = k;
+}
+
+void delX2(SqList& L, Elemtype x) {
+	int k = 0;		//numbers == x
+	for (int i = 0; i < L.length; i++) {
+		if (L.data[i] == x) {
+			k++;
+		}
+		else {
+			L[i - k] = L[i];
+		}
+	}
+	L.length -= k;
 }
 
 //Q4
@@ -71,8 +111,8 @@ bool Delete(SqList& L, int s, int t) {
 	while (L.data[j] > t) {
 		j--;
 	}
-	for (int k = 0; k < L.length - j; k++) {
-		L.data[i + k] = L.data[j + k];
+	for (int k = 0; k < j - i + 1; k++) {
+		L.data[i] = L.data[i + j - i + 1];
 	}
 	L.length -= j - i + 1;
 	return true;
@@ -103,6 +143,30 @@ bool listDeleteBetween(SqList& L, int s, int t) {
 	return true;
 }
 
+	//answer 5:
+void deleteBetween(SqList& L, Elemtype s, Elemtype t) {
+	int k = 0;		//numbers of x(x > t || x < s)
+	for (int i = 0; i < L.length; i++) {
+		if (L.data[i] > t || L.data[i] < s) {
+			L.data[k] = L.data[i];
+			k++;
+		}
+	}
+}
+
+void deleteBetween2(SqList& L, Elemtype s, Elemtype t) {
+	int k = 0;		// numbers [s, t]
+	for (int i = 0; i < L.length; i++) {
+		if (L.data[i] >= s && L.data[i] <= t) {
+			k++;
+		}
+		else {
+			L.data[i - k] = L.data[i];
+		}
+	}
+	L.length -= k;
+}
+
 //Q6
 //delete ith element from list, don not consider about error , delete repeating n elements from ith to  i + n th
 void deleteList(SqList& L, int i, int n) {
@@ -126,6 +190,7 @@ void deleteRepeated(SqList& L) {
 		}
 	}
 }
+
 
 //Q7
 bool merge(SqList& L1, SqList& L2, SqList &L) {
