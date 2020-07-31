@@ -67,3 +67,29 @@ bool Delete(SqList& L, int s, int t) {
 	L.length -= j - i + 1;
 	return true;
 }
+
+//Q5 
+//delete ith element from list
+bool listDelete(SqList& L, int i) {
+	if (i < 1 || i > L.length) {
+		return false;
+	}
+	for (int j = i; j < L.length; j++) {
+		L.data[j - 1] = L.data[j];
+	}
+	L.length--;
+	return true;
+}
+
+bool listDeleteBetween(SqList& L, int s, int t) {
+	if (s >= t || L.length == 0) {
+		return false;
+	}
+	for (int i = 0; i < L.length; i++) {
+		if (L.data[i] >= s && L.data[i] <= t) {
+			listDelete(L, i + 1);
+		}
+	}
+	return true;
+}
+
