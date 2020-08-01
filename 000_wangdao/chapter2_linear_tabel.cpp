@@ -1,3 +1,4 @@
+//P19
 //definition of sequence table
 typedef struct{
 	int *data;
@@ -286,4 +287,93 @@ void exchage(Elemtype A[], int m, int n, int arraySize) {
 	reverse(A, 0, m + n - 1, arraySize);
 	reverse(A, 0, n - 1, arraySize);
 	reverse(A, n, m + n - 1, arraySize);
+}
+
+//Q9
+void find(Elemtype A[], Elemtype x, int& low, int& high, int &mid) {
+	while (low <= high) {
+		mid = (low + high) / 2;
+		if (A[mid] == x) {
+			break;
+		}
+		else if (A[mid] < x) {
+			low = mid + 1;
+		}
+		else if (A[mid] > x) {
+			high = mid - 1;
+		}
+	}
+}
+void fucntion(Elemtype A[], Elemtype x) {
+	int low = 0, high = n - 1, mid = (low + high) / 2;
+	find(A, low, high, mid);
+	if (A[mid] == x && mid != n - 1) {
+		Elemtype temp = A[mid];
+		A[mid] = A[mid + 1];
+		A[mid + 1] = temp;
+	}
+	// can not find x in array
+	if (low > high) {
+		for (int i = n - 1; i > high; i--) {
+			A[i + 1] = A[i];
+		}
+		A[i + 1] = x;
+	}
+}
+
+// Q10
+void reverse(int A[], int from, int to) {
+	if (from >= to) {
+		return;
+	}
+	while (from <= to) {
+		int temp = A[from];
+		A[from] = A[to];
+		A[to] = temp;
+		from--;
+		to++;
+	}
+}
+void converse(int A[], int p) {
+	reverse(A, 0, p - 1);
+	reverse(A, p, n - 1);
+	reverse(A, 0, n - 1);
+}
+
+//Q11
+//time: O()
+int mid(int A[], int B[]) {
+	int[] C;
+	int k = 0, i = 0, j = 0;
+	while (i < n1 && j < n2) {
+		if (A[i] >= B[j]) {
+			C[k++] = A[i++];
+		}
+		else {
+			C[k++] = B[j++];
+		}
+		if (k == n) {
+			return C[k - 1];
+		}
+	}
+}
+
+//Q12: first sort the array, then go on
+int function(int A[]) {
+	int k = 1, temp = 1, mid = A[0], sub = 0;
+	for (int i = 0; i < n - 1; i++) {
+		if (A[i] == A[i + 1]) {
+			sub = i;
+			temp++;
+		}
+		if (temp > k) {
+			mid = A[sub];
+		}
+	}
+	if (temp > n / 2) {
+		return mid;
+	}
+	else {
+		return -1;
+	}
 }
