@@ -198,7 +198,35 @@ void deleteRepeated(SqList& L) {
 	}
 }
 
+	//answer 6:
+bool deleleSame(SqList& L) {
+	if (L.length == 0) {
+		return false;
+	}
+	for (int i = 0, int j = 1; j < L.length; j++) {		//methon of insert sorting 
+		if (L.data[i] != L.data[j]) {
+			L.data[++i] = L.data[j];
+		}
+	}
+	L.length = i + 1;
+	return true;
+}
 
+	//for unsorted list
+bool deleteSameUnsorted(SqList& L) {
+	if (L.length == 0) {
+		return false;
+	}
+	int a[max] = {0};		//max >= max(L.data[i])
+	int j = 0;
+	for (int i = 0; i < L.length; i++) {
+		if (a[L.data[i]]== 0) {
+			a[L.data[i]]++;
+			L.data[j++] = L.data[i];
+		}
+	}
+	L.length = j;
+}
 //Q7
 bool merge(SqList& L1, SqList& L2, SqList &L) {
 	if (L1.length + L2.length > L.maxSize) {
