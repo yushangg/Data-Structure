@@ -105,16 +105,23 @@ bool Delete(SqList& L, int s, int t) {
 	}
 	//common occasions, assume the ascending
 	int i = 0, j = L.length - 1;
-	while (L.data[i] < s) {
+	while (L.data[i] < s && i < L.length) {
 		i++;
 	}
-	while (L.data[j] > t) {
+	while (L.data[j] > t && j >= 0) {
 		j--;
 	}
 	for (int k = 0; k < j - i + 1; k++) {
 		L.data[i] = L.data[i + j - i + 1];
 	}
 	L.length -= j - i + 1;
+	/*
+	the above lines can also as belows
+	for (	; j < L.length - 1; i++,j++) {
+		L.data[i] = L.data[j + 1];
+	}
+	L.length = i;
+	*/
 	return true;
 }
 
