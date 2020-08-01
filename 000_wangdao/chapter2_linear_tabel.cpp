@@ -228,7 +228,8 @@ bool deleteSameUnsorted(SqList& L) {
 	L.length = j;
 }
 //Q7
-bool merge(SqList& L1, SqList& L2, SqList &L) {
+//asumming as the ascending
+bool merge(SqList L1, SqList L2, SqList &L) {
 	if (L1.length + L2.length > L.maxSize) {
 		return false;
 	}
@@ -251,4 +252,38 @@ bool merge(SqList& L1, SqList& L2, SqList &L) {
 	}
 	L.length = k;
 	return true;
+}
+
+//Q8
+//reverse three times
+void reverse(Elemtype A[], int left, int right, int arraySize) {
+	// left, right is the array subscript; arraySize is the length of array
+	if (left >= right || right >= arraySize) {
+		reutrn;
+	}
+	for (int i = left; i < (right + left) / 2; i++) {
+		Elemtype temp = A[i];
+		A[i] = A[right - i];
+		A[right - i] = temp;
+	}
+}
+
+void reverse2(Elemtype A[], int left, int right) {
+	if (left >= right) {
+		return;
+	}
+	int i = left, j = right;
+	while (i < j) {
+		Elemtype temp = A[i];
+		A[i] = A[j];
+		A[j] = temp;
+		i++;
+		j--;
+	}
+}
+
+void exchage(Elemtype A[], int m, int n, int arraySize) {
+	reverse(A, 0, m + n - 1, arraySize);
+	reverse(A, 0, n - 1, arraySize);
+	reverse(A, n, m + n - 1, arraySize);
 }
