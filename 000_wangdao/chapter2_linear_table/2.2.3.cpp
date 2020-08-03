@@ -381,7 +381,7 @@ int function(int A[]) {
 //Q13
 ing findMissMin(int A[], int n) {
 	int i, *B;
-	B = (int*)malloc(sizeof(int) * n);
+	B = (int*)malloc(sizeof(int) * n);		//set array to zero
 	memset(B, 0, sizeof(int) * n);
 	for (int i = 0; i < n; i++) {
 		if (A[i] > 0 && A[i] <= n) {
