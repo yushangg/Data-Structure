@@ -10,7 +10,7 @@ void deleteX(LinkList& L, Elemtype x) {
 	if (L == NULL) {
 		return;
 	}
-	if (L->next == x) {
+	if (L->data == x) {
 		p = L;
 		L = L->next;
 		free(p);
@@ -19,4 +19,9 @@ void deleteX(LinkList& L, Elemtype x) {
 	else {
 		deleteX(L->next, x);
 	}
+}
+
+//Q2
+void deleteX(LinkList& L, Elemtype x) {
+	
 }
