@@ -23,5 +23,18 @@ void deleteX(LinkList& L, Elemtype x) {
 
 //Q2
 void deleteX(LinkList& L, Elemtype x) {
-	
+	LNode* pre;
+	LNode* p = L->next;
+	LNode* q = L;
+	while (p != NULL) {
+		if (p->data == x) {
+			q = p;
+			p = p->next;
+			free(q);
+		}
+		else {
+			pre = p;
+			p = p->next;
+		}
+	}
 }
