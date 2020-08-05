@@ -132,3 +132,16 @@ void reverse(LinkList& L) {
 		p = r;
 	}
 }
+
+//a bit complicated
+void Reverse(LinkList& L) {
+	LNode* pre, * p = L->next, * r = p->next;
+	p->next = NULL;
+	while (r != NULL) {		//if r == NULL, then node p is the last node
+		pre = p;
+		p = r;
+		r = r->next;
+		p->next = pre;
+	}
+	L->next = p;
+}
