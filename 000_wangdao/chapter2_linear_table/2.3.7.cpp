@@ -85,16 +85,37 @@ void deleteMin(LinkList& L) {
 	}
 	//delete the target LNode
 	p = L->next;
+	LNode* pre = L;
+	LNode* q;
 	while (p->next != NULL) {
-		if (p->next->data == min) {
-			LNode* q = p;
-			p = p->next->next;
+		if (p->data == min) {
+			q = p;
+			p = p->next;
 			free(q);
 		}
 		else {
+			pre = p;
 			p = p->next;
 		}
 	}	
+}
+
+//answer
+void DeleteMin(LinkList& L) {
+	LNode* pre = L, * p = L->next;
+	LNode* minpre = pre, * minp = p;
+	while (p != NULL) {
+		if (p->data < pre->data) {
+			minp = p;
+			minpre = pre;
+		}
+		else {
+			pre = p;
+			p = p->next;
+		}
+	}
+	minpre->next = minp->next;
+	free(minp);
 }
 
 //Q5
