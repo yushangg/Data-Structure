@@ -119,7 +119,7 @@ void DeleteMin(LinkList& L) {
 }
 
 //Q5
-//consider using tail insert 
+//consider using head insert 
 void reverse(LinkList& L) {
 	LNode* p, * r;
 	p = L->next;
@@ -133,7 +133,7 @@ void reverse(LinkList& L) {
 	}
 }
 
-//a bit complicated
+//a bit complicated, reverse the link
 void Reverse(LinkList& L) {
 	LNode* pre, * p = L->next, * r = p->next;
 	p->next = NULL;
@@ -144,4 +144,39 @@ void Reverse(LinkList& L) {
 		p->next = pre;
 	}
 	L->next = p;
+}
+
+//Q6
+void Sort(LinkList& L) {
+	LNode* p = L->next, * pre;
+	LNode* r = p->next;
+	p->next = NULL;
+	p = r;
+	while (p != NULL) {
+		r = p->next;		//use node r to store the node after p;
+		pre = L;		//everytime compare from the head node
+		while (pre->next != NULL && pre->next->data < p->data) {
+			pre = pre->next;
+		}
+		p->next = pre->next;   
+		pre->next = p;
+		p = r;
+	}
+}
+
+//Q7
+void Delete(LinkList& L, ElemType m, ElemType n) {
+	LNode* pre = L, * p = L->next;
+	while (p != NULL) {
+		if (p->data > m && p->data < n) {
+			LNode* q = p;
+			pre->next = p->next;
+			p = p->next;
+			free(q);
+		}
+		else {
+			pre = pre->next;
+			p = p->next;
+		}
+	}
 }
