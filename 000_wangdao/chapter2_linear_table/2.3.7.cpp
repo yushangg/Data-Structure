@@ -103,7 +103,7 @@ void deleteMin(LinkList& L) {
 //answer
 void DeleteMin(LinkList& L) {
 	LNode* pre = L, * p = L->next;
-	LNode* minpre = pre, * minp = p;
+	LNode* minpre = pre, * minp = p;		//use pre as the node before minLNode
 	while (p != NULL) {
 		if (p->data < pre->data) {
 			minp = p;
@@ -119,9 +119,16 @@ void DeleteMin(LinkList& L) {
 }
 
 //Q5
+//consider using tail insert 
 void reverse(LinkList& L) {
-	LNode* p = L->next;
-	LNode* q;
-	while (p->next != NULL) {
+	LNode* p, * r;
+	p = L->next;
+	L->next = NULL;
+	//insert LNode p after the head LNode
+	while (p != NULL) {
+		r = p->next;		//restore LNode after p
+		p->next = L->next;
+		L->next = p;
+		p = r;
 	}
 }
