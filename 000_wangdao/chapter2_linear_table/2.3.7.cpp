@@ -180,3 +180,44 @@ void Delete(LinkList& L, ElemType m, ElemType n) {
 		}
 	}
 }
+
+//Q8
+/* 
+two lists like a "Y", after the common node, every node is the same;
+calulate the aba(len1 - len2), perform "longList = longList->next; "
+then longList & shortList perform at the same time 
+*/
+int Length(LinkList L) {
+	int res = 0;
+	LNode* p = L->next;
+	while (p != NULL) {
+		res++;
+		p = p->next;
+	}
+}
+
+LinkNode* SearchFirstCommon(LinkList L2, LinkList L2) {
+	int len1 = Length(L1), len2 = Length(L2);
+	Linklist longList, shortList;
+	int var;		// var = abs(len1 - len2)
+	if (len1 >= len2) {
+		longList = L1->next, shortList = L2->next;
+		var = len1 - len2;
+	}
+	else {
+		longList = L2->next, shortList = L1->next;
+		var = len2 - len1;
+	}
+	for (int i = 0; i < var; i++) {
+		longList = longList->next;
+	}
+	while (longList != NULL) {
+		if (longList == shortList) {
+			return longList;
+		}
+		else {
+			longList = longList->next;
+			shortList = shortList->next;
+		}
+	}
+}
