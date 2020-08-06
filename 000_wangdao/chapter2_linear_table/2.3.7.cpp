@@ -385,3 +385,40 @@ void GetCommon(LinkList& A, LinkList& B) {
 }
 
 //Q15
+LinkList Union(LinkList& La, LinkList& Lb) {
+	LNode* pa = La->next, * pb = Lb->next, tmp;
+	pc = La;
+	while (pa != NULL && pb != NULL) {
+		if (pa->data == pb->data) {
+			pc->next = pa->data;
+			pc = pa;
+			pa = pa->next;
+			tmp = pb;
+			pb = pb->next;
+			free(tmp);
+		}
+		else if (pa->data < pb->data) {
+			tmp = pa;
+			pa = pa->next;
+			free(tmp);
+		}
+		else {
+			tmp = pb;
+			pb = pb->next;
+			free(tmp);
+		}
+	}
+	while (pa != NULL) {
+		tmp = pa;
+		pa = pa->next;
+		free(tmp);
+	}
+	while (pb != NULL) {
+		tmp = pb;
+		pb = pb->next;
+		free(tmp);
+	}
+	pc->next = NULL:
+	free(Lb);
+	return La;
+}
