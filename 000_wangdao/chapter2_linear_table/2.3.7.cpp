@@ -158,7 +158,7 @@ void Sort(LinkList& L) {
 		while (pre->next != NULL && pre->next->data < p->data) {
 			pre = pre->next;
 		}
-		p->next = pre->next;   
+		p->next = pre->next;		//insert between pre node and "pre->next" node
 		pre->next = p;
 		p = r;
 	}
@@ -221,3 +221,167 @@ LinkNode* SearchFirstCommon(LinkList L2, LinkList L2) {
 		}
 	}
 }
+
+//Q9 
+/*
+consider using head insert function to build incremental list,
+then print in new node order
+*/
+
+void Sort(LinkList& L) {		//like Q6
+	LNode* p = L->next, * pre, * r;
+	while (p != NULL) {
+		r = p->next;
+		pre = L;
+		while (pre->next != NULL && pre->next->data < p->data) {
+			pre = pre->next;
+		}
+		p->next = pre->next;
+		pre->next = p;
+		p = r;
+	}
+}
+void PrintIncrement(LinkList& L) {
+	Sort(L);
+	LNode* p = L->next;
+	while (p != NULL) {
+		q = p;
+		print("%d ", p->data);
+		p = p->next;
+		free(q);
+	}
+}
+
+/*
+traverse the LinkList to find the min,
+then print
+*/
+void Print(LinkList& L) {
+	while (L->next != NULL) {
+		LNode* minpre = L, * p = L->next;
+		while (p->next != NULL) {
+			if (p->next->data < minpre->next->data) {
+				minpre = p;
+			}
+			p = p->next;
+		}
+		print(minpre->next->data);
+		LNode* u = minpre->next;
+		minpre->next = u->next;
+		free(u);
+	}
+	free(L);
+}
+
+
+//Q10
+void Segment(LinkList& A, LinkList& B) {
+	LNode* p = A->next, *q, *r1 = A, *r2 = B;
+	int i = 0;
+	while (p != NULL) {
+		if (i % 2 == 0) {
+			r1->next = p;
+			r1 = p;
+		}
+		else {
+			r2->next = p;
+			r2 = p;
+		}
+		i++;
+		p = p->next;
+	}
+	r1->next = NULL;
+	r2->next = NULL;
+}
+
+//Q11
+void Segment(LinkList& L, LinkList& A, LinkList& B) {
+	LNode* p = L->next, *ra = A;
+	B->next = NULL;
+	A->next = NULL
+	while (p != NULL) {
+		ra->next = p;
+		ra = p;
+		p = p->next;
+		if (p != NULL) {
+			q = p->next;
+		}
+		p->next = B->next;
+		B->next = p;
+		p = q;
+	}
+}
+
+//Q12
+void DeleteSame(LinkList& L) {
+	LNode* p = L->next, * q;
+	if (p == NULL) {
+		return;
+	}
+	while (p->next != NULL) {
+		q = p->next;
+		if (p->data == q->data) {
+			p->next = q->next;
+			free(q);
+		}
+		else {
+			p = p->next;
+		}
+	}
+}
+
+//Q13
+void  MergeList(LinkList& La, LinkList& Lb) {
+	LNode* r, * pa = La->next, * pb = Lb->next;
+	La->next = NULL:
+	while (pa != NULL && pb != NULL) {
+		if (pa->data <= pb->data) {
+			r = pa->next;
+			pa->next = La->next;
+			La->next = pa;
+			pa = r;
+		}
+		else {
+			r = pb->next;
+			pb->next = La->next;
+			La->next = pb;
+			pb = r;
+		}
+	}
+	if (pa != NULL) {
+		pb = pa;
+	}
+	while (pb != NULL) {
+		r = pb->next;
+		pb->next = La->next;
+		La->next = pb;
+		pb = r;
+	}
+	free(Lb);
+}
+
+//Q14
+void GetCommon(LinkList& A, LinkList& B) {
+	LNode* p = A->next, * q = B->next, * r, * s;
+	LinkList C = (LinkList)malloc(sizeof(LNode));
+	r = C;
+	while (p != NULL && q != NULL) {
+		if (p->data < q->data) {
+			p = p->next;
+		}
+		else if (p->data > q->data) {
+			q = q->next;
+		}
+		else {		//tail insert
+			s = (LNode*)malloc(sizeof(LNode));
+			s->data = p->data;
+			r->next = s;
+			r = s;
+			p = p->next;
+			q = q->next;
+		}
+	}
+	r->next = NULL;
+}
+
+//Q15
