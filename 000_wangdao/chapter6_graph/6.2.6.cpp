@@ -11,6 +11,24 @@ typedef struct {
 }MGraph;
 
 /*
+图的邻接表存储结构定义
+*/
+#define MaxVertexNum 100
+typedef struct ArcNode {		//边表结点
+	int adjvex;			//该弧所指向的顶点的位置
+	struct ArcNode* next;	//指向下一条弧的指针
+	//InfoType info;	// 权值
+}ArcNode;
+typedef struct VNode {		//顶点表节点
+	VertexType data;		//顶点信息
+	ArcNode* first；		//指向第一条依附该顶点的弧的指针
+}VNode, AdjList[MaxVertexNum];
+typedef struct {
+	AdjList vertices;		//邻接表
+	int vexnum, arcnum;		
+}ALGraph;
+
+/*
 二、4
 写出从图的邻接表表示转换成邻接矩阵表示的算法
 */
