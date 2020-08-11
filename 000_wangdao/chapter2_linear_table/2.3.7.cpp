@@ -446,3 +446,21 @@ bool Pattern(LinkList& A, LinkList& B) {
 }
 
 //Q17
+/*
+设置两个工作指针，一个从左向右扫描，一个从右向左扫描，
+直到这两个指针相遇(奇数个结点是指向同一个结点，偶数个结点是
+p->next = q or q->prior = p)
+*/
+int Symmetry(LlinkList L) {
+	LNode* p = L->next, * q = L->prior;
+	while (p != q && q->next != p) {	//while循环里面的第二个条件，斟酌一下
+		if (p->data == q->data) {
+			p = p->next;
+			q = q->prior;
+		}
+		else {
+			return 0;
+		}
+	}
+	return 1;
+}
