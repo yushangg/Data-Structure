@@ -1,4 +1,16 @@
 /*
+图的邻接矩阵存储结构定义
+*/
+#define MaxVertexNum 100
+typedef char VertexType;
+typedef int EdgeType;
+typedef struct {
+	VertexType Vex[MaxVertexNum];		//顶点表
+	EdgeType Edge[MaxVertexNum][MaxVertexNum];		//邻接矩阵、边表
+	int vexnum, arcnum;		//图当前的定点数和弧的数目
+}MGraph;
+
+/*
 二、4
 写出从图的邻接表表示转换成邻接矩阵表示的算法
 */
