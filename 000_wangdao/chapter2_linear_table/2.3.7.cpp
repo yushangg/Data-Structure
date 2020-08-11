@@ -422,3 +422,27 @@ LinkList Union(LinkList& La, LinkList& Lb) {
 	free(Lb);
 	return La;
 }
+
+//Q16 with head node
+bool Pattern(LinkList& A, LinkList& B) {
+	LNode* p = A->next, * q = B->next, * pre = p;
+	while (p != NULL && q != NULL) {
+		if (p->data != q->data) {
+			pre = pre->next;
+			p = pre;
+			q = B->next;
+		}
+		else {
+			p = p->next;
+			q = q->next;
+		}
+		if (q == NULL) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+}
+
+//Q17
