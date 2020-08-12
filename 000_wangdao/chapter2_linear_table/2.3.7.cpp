@@ -464,3 +464,21 @@ int Symmetry(LlinkList L) {
 	}
 	return 1;
 }
+
+/*
+Q18
+找到第一个链表的最后一个结点，然后将结点的后继变成第二个链表的第一个结点;
+将第二个链表的最后一个结点指向第一个链表的头结点
+*/
+void Merge(LinkList& h1, LinkList& h2) {
+	LNode* p = h1->next, * q = h2->next;
+	while (p->next != h1) {
+		p = p->next;
+	}
+	//当前p的后继是h1，p是尾结点
+	p->next = q;
+	while (q->next != h2) {
+		q = q->next;
+	}
+	q->next = h1;
+}
