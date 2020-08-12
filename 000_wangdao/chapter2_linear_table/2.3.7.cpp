@@ -510,3 +510,37 @@ void DeleteAllNode(LinkList& L) {
 	}
 	free(L);
 }
+
+/*
+Q20
+
+*/
+DLinkList Locate(DLinkList& L, ElemType x) {
+	DNode* p = L->next, * q;
+	while (p != NULL && p->data != x) {
+		p = p->next;
+	}
+	//跳出循环有两种情况。 1.没有找到x，来到了链表结尾； 2.找到了x
+	if (p == NULL) {
+		printf("ERROR");
+		exit(0);
+	}
+	//找到了x元素，需要将结点访问频度+1， 并且移动到合适位置
+	else {
+		p->freq++;
+		if (p->next != NULL) {
+			p->next->pred = p->pred;
+		}
+		q = p->pred;
+		//通过移动指针，最后p该移动q指向的结点后面
+		while (q != NULL && q->freq <= p->freq) {
+			q = q->pred;
+		}
+		//一个环
+		p->next = q->next;
+		q->next->pred = p;
+		p->pred = q;
+		q->next = p;
+	}
+	return p;
+}
