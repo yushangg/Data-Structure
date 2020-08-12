@@ -482,3 +482,31 @@ void Merge(LinkList& h1, LinkList& h2) {
 	}
 	q->next = h1;
 }
+
+/*
+Q19
+对于循环单链表，在不空的时候进行循环，每一次循环都找到一个最小的结点并删除它
+*/
+void DeleteAllNode(LinkList& L) {
+	//p, pre 是工作指针， minp 和  minpre作为中继的记录
+	LNode* p, * pre, * minp, * minpre;
+	while (L->next != L) {
+		p = L->next;
+		pre = L;
+		minp = p;
+		minpre = pre;
+		while (p != L) {
+			if (p->data < minp->data) {
+				minp = p;
+				minpre = pre;
+			}
+			pre = p;
+			p = p->next;
+		}
+		//输出后将最小元素结点断开，并释放空间
+		printf("%d", minp->data);
+		minpre->next = minp->next;
+		free(minp);
+	}
+	free(L);
+}
