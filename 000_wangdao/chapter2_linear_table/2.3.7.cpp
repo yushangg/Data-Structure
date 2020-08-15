@@ -544,3 +544,75 @@ DLinkList Locate(DLinkList& L, ElemType x) {
 	}
 	return p;
 }
+
+/*
+使用两个工作指针，p和q，开始都指向第一个结点。p开始移动，q不动；
+当p移动到了第k个结点时，p、q同时开始移动。
+当p移动到了最后一个结点的时候，q的位置就是倒数第k个结点的位置
+Q21
+*/
+typedef struct LNode {
+	int data;
+	struct LNode* link;
+}LNode, * LinkList;
+
+int Search(LinkList list, int k) {
+	LNode* p = list->link, * q = list->link;
+	int count = 0;
+	while (p != NULL) {
+		if (count < k) {
+			p = p->link;
+			count++;
+		}
+		else {
+			p = p->link;
+			q = q->link;
+		}
+		if (count < k) { // 链表自身的长度不够
+			return 0;
+		}
+		else {
+			printf("%d", q->data);
+			return 1;
+		}
+	}
+}
+
+
+/*
+求出两个链表的长度len1 和 len2，两者相减得到多出来的结点，
+从这个结点之后开始同步向后，直到data域相同
+Q22
+*/
+typedef struct LNode {
+	char data;
+	struct LNode* next;
+}LNode, * LinkList;
+
+/*求链表的长度*/
+int Length(Linklist list) {
+	int len = 0;
+	while (list->next != NULL) {
+		len++;
+		list = list->next;
+	}
+}
+
+/*找到共同后缀的起始地址*/
+LNode* FindAddress(LinkList str1, LinkList str2) {
+	int len1 = Length(str1), len2 = Length(str2);
+	LNode* p = str1->next. * q = str2->next;
+	while (len1 > len2) {
+		p = p->next;
+		len1--;
+	}
+	while (len1 < len2) {
+		q = q->next;
+		len2--;
+	}
+	while (p != NULL && q != NULL && p->next != q->next) {
+		p = p->next;
+		q = q->next;
+	}
+	return p->next;
+}
