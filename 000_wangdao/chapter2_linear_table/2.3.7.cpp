@@ -649,6 +649,28 @@ void func(Linklist list, int n) {
 }
 
 /*
-
+设置快慢指针fast， low ，因为fast快于slow，所有当slow进入环之后，
+fast不需要一周就可以追上slow。
+设从头结点到入口的距离是a个结点，fast和slow相遇时候，距离入口是x个结点的长度
+设环一圈是r个结点，fast和slow相遇的时候，fast已经在环里面n圈了
+故 a + x = (a + x + n * r) / 2    ;  建立的依据是时间相同
+---------> a = n * r - x
+即可以设置两个指针，一个指向头节点，一个指向相遇点，同步移动，最后就会在入口点相遇
 Q24
 */
+LNode* FindLoopStart(LNode* head) {
+	LNode* fast = head->next, * slow = head->next;
+	while (fast->next != NULL && slow != NULL) {
+		slow = slow->next;
+		fast = fast->next->next;
+		if (slow == fast) break;
+	}
+	if (slow == NULL || fast->next == NULL)
+		return NULL;
+	LNode* p1 = head, * p2 = slow;
+	while (p1 != p2) {
+		p1 = p1->next;
+		p2 = p2->next;
+	}
+	return p1;
+}
