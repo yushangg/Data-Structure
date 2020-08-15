@@ -674,3 +674,41 @@ LNode* FindLoopStart(LNode* head) {
 	}
 	return p1;
 }
+
+
+/*
+为了方便取得后半部分的元素，将后半段原地逆序
+Q25
+*/
+typedef struct node {
+	int data;
+	struct node* next;
+}NODE;
+void ChangeList(NODE* head) {
+	NODE* p = head->next, * q = head->next;
+	while (q != NULL) {	//q比p快，q到达尾结点时，p是中间结点
+		p = p->next;
+		q = q->next;
+		if (q->next != NULL)
+			q = q->next;
+	}
+	q = p->next; //这一句之后，q是后半段的首个结点
+	/*单链表原地逆序，使用头插法*/
+	p->next = NULL; // 从空链表开始插入
+	while (q != NULL) {
+		NODE* tmp = q->next;
+		q->next = p->next;
+		p->next = q;
+		q = tmp;
+	}
+
+	NODE* s = head->next;
+	q = p->next;	//s和q分别指向前后两段的第一个数据结点
+	while (q != NULL) {
+		NODE* tmp = q->next;
+		q->next = s->next;
+		s->next = q;
+		s = q->next;
+		q = tmp;
+	}
+}
