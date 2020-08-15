@@ -616,3 +616,39 @@ LNode* FindAddress(LinkList str1, LinkList str2) {
 	}
 	return p->next;
 }
+
+
+/*
+使用空间换时间的思想，利用一个辅助数组记录链表中已经出现的数值
+Q23
+*/
+typedef struct LNode {
+	int data;
+	struct LNode* link;
+}LNode, * LinkList;
+
+void func(Linklist list, int n) {
+	LNode* p = list->link, * temp;
+	int* q;
+	q = (int*)malloc(sizeof(int) * (n + 1));
+	for (int i = 0; i < n + 1; i++) {
+		*(q + i) = 0;	//辅助数组初始化为0
+	}
+	while (p != NULL) {
+		if (*(q + abs(p->data)) == 0) {
+			p = p->link;
+			*(q + abs(p->data) = 1;
+		}
+		else {
+			temp = p->link;
+			p->link = p->link->link;
+			free(temp);
+		}
+	}
+	free(q);
+}
+
+/*
+
+Q24
+*/
