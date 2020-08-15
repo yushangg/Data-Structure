@@ -22,7 +22,7 @@ bool Judge(char A[]) {
 
 
 /*
-前半段的结点入栈后，和后半段的开始比较
+前半段的结点入栈后，和后半段的开始比较,一旦有不相等的结点便跳出循环
 Q4
 */
 typedef struct LNode {
@@ -51,4 +51,37 @@ bool Judge(LinkList list, int n) {
 		return true;
 	else
 		return false;
+}
+
+
+/*
+
+Q5
+*/
+#define maxsize 100
+typedef struct stack {
+	int stack[maxsize];
+	int top[2];		//两个栈顶指针
+}stack;
+stack s;
+
+/*入栈操作*/
+int push(int flag, int x) {
+//flag = 1表示左边的s1栈， flag = 2表示右边的s2栈
+	if (i != 1 && i != 2) {
+		printf("栈的编号不对");
+		return 0;
+	}
+	if (s.top[1] = s.top[0] + 1) {
+		printf("栈已经满了");
+		return 0;
+	}
+	if (flag == 1) {
+		s.stack[++s.top[0]] = x;
+		return true;
+	}
+	else if (flag == 2) {
+		s.stack[--s.top[1]] = x;
+		return true;
+	}
 }
