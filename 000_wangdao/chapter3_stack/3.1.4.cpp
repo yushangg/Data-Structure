@@ -60,7 +60,7 @@ Q5
 */
 #define maxsize 100
 typedef struct stack {
-	int stack[maxsize];
+	ElemType stack[maxsize];
 	int top[2];		//两个栈顶指针
 }stack;
 stack s;
@@ -68,7 +68,7 @@ stack s;
 /*入栈操作*/
 int push(int flag, int x) {
 //flag = 1表示左边的s1栈， flag = 2表示右边的s2栈
-	if (i != 1 && i != 2) {
+	if (flag != 1 && flag != 2) {
 		printf("栈的编号不对");
 		return 0;
 	}
@@ -83,5 +83,29 @@ int push(int flag, int x) {
 	else if (flag == 2) {
 		s.stack[--s.top[1]] = x;
 		return true;
+	}
+}
+
+/*退栈操作*/
+ElemType pop(int flag) {
+	if (flag != 1 && flag != 2) {
+		printf("栈的编号不对");
+		exit(0);
+	}
+	if (flag == 1) {
+		if (s.top[0] == -1) {
+			printf("栈空");
+			return -1;
+		}
+		else
+			return s.stack[s.top[0]--];
+	}
+	else if (flag == 2) {
+		if (s.top[1] == maxsize) {
+			printf("栈空");
+			return -1;
+		}
+		else
+			return s.stack[s.top[1]++];
 	}
 }
